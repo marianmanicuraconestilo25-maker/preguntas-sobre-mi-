@@ -1,0 +1,144 @@
+:root {
+  --rosa-claro: #f8e3e6;
+  --rosa: #eec0ca;
+  --rosa-hondo: #c9788f;
+  --vino: #4a1a2a;
+  --oro-1: #f6e3a6;
+  --oro-2: #cfa84e;
+  --oro-3: #8f6a1c;
+  --oro: linear-gradient(135deg, var(--oro-1), var(--oro-2) 45%, var(--oro-3));
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+body {
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  font-family: "Jost", system-ui, sans-serif;
+  color: var(--vino);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.008' numOctaves='5' seed='11'/%3E%3CfeColorMatrix values='0 0 0 0 0.62 0 0 0 0 0.3 0 0 0 0 0.4 1 0 0 0 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0.12 0.75 0.12 0 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006 0.011' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.81 0 0 0 0 0.66 0 0 0 0 0.3 1 0 0 0 0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 0 0 0 0 0.1 0.8 0.1 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    radial-gradient(circle at 20% 15%, #fff4f5 0, transparent 45%),
+    linear-gradient(160deg, var(--rosa-claro), var(--rosa) 70%, #e4a9b8);
+  background-size: 900px 900px, 900px 900px, auto, auto;
+}
+
+.marco {
+  position: relative;
+  width: min(100%, 36rem);
+  min-height: 26rem;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  display: grid;
+  align-items: center;
+  text-align: center;
+  background: rgba(255, 247, 248, 0.72);
+  backdrop-filter: blur(3px);
+  border: 3px solid transparent;
+  border-radius: 4px;
+  background-clip: padding-box;
+  box-shadow: 0 0 0 3px transparent, 0 24px 50px -20px rgba(120, 40, 70, 0.45);
+}
+/* Marco dorado */
+.marco::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: 6px;
+  background: var(--oro);
+}
+.marco::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--oro-2);
+  pointer-events: none;
+}
+
+.pantalla { display: none; }
+.pantalla.activa { display: block; }
+
+h1, h2, .puntaje, .remate {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(2.4rem, 8vw, 3.6rem); }
+h2 { font-size: clamp(1.6rem, 5vw, 2.1rem); min-height: 3.6rem; }
+
+h1, .puntaje, .remate {
+  background: var(--oro);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 1px 0 rgba(74, 26, 42, 0.25));
+}
+
+.sub { margin: 0 0 1.75rem; font-size: 1.05rem; line-height: 1.5; }
+.contador { margin: 0.5rem 0 0.25rem; font-size: 0.95rem; color: var(--rosa-hondo); }
+
+.progreso {
+  height: 4px;
+  background: rgba(201, 120, 143, 0.25);
+  border-radius: 2px;
+  overflow: hidden;
+}
+#barra { height: 100%; width: 0; background: var(--oro); transition: width 0.4s ease; }
+
+input {
+  width: 100%;
+  margin: 0.5rem 0 1rem;
+  padding: 0.85rem 1rem;
+  font: inherit;
+  font-size: 1.1rem;
+  text-align: center;
+  color: var(--vino);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--oro-2);
+  border-radius: 3px;
+}
+input:disabled { opacity: 0.6; }
+
+.btn {
+  padding: 0.8rem 2rem;
+  font: inherit;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--vino);
+  background: var(--oro);
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px -6px rgba(143, 106, 28, 0.7);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 9px 18px -6px rgba(143, 106, 28, 0.8); }
+.btn:active { transform: translateY(0); }
+.btn-sec { background: transparent; border: 1px solid var(--oro-3); box-shadow: none; }
+.btn[hidden] { display: none; }
+
+:focus-visible { outline: 3px solid var(--rosa-hondo); outline-offset: 3px; }
+
+.feedback { min-height: 1.6rem; margin: 0 0 1rem; font-weight: 500; }
+.feedback.ok { color: #7a5a10; }
+.feedback.no { color: var(--rosa-hondo); }
+/* Destello dorado al acertar: responde a la acción de la persona */
+.marco.acierto::after { animation: destello 0.7s ease; }
+@keyframes destello {
+  0% { box-shadow: 0 0 0 0 rgba(246, 227, 166, 0.9); }
+  100% { box-shadow: 0 0 0 18px rgba(246, 227, 166, 0); }
+}
+
+.puntaje { font-size: clamp(3.5rem, 14vw, 5.5rem); }
+.cierre { margin: 0 0 1.75rem; }
+.cierre p { margin: 0.2rem 0; }
+.remate { font-size: 1.9rem; margin-top: 0.75rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

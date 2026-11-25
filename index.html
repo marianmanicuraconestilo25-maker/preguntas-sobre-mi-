@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Qué tanto me conoces?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="marco">
+
+    <section id="inicio" class="pantalla activa">
+      <h1>¿Qué tanto me conoces?</h1>
+      <p class="sub">Diez preguntas. Responde con lo primero que se te ocurra.</p>
+      <button id="btn-empezar" class="btn">Empezar</button>
+    </section>
+
+    <section id="pregunta" class="pantalla" aria-live="polite">
+      <div class="progreso" role="progressbar" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1">
+        <div id="barra"></div>
+      </div>
+      <p id="contador" class="contador"></p>
+      <h2 id="texto-pregunta"></h2>
+      <form id="form-respuesta" autocomplete="off">
+        <input id="respuesta" type="text" required aria-label="Tu respuesta">
+        <button id="btn-responder" class="btn" type="submit">Responder</button>
+      </form>
+      <p id="feedback" class="feedback" role="status"></p>
+      <button id="btn-siguiente" class="btn btn-sec" hidden>Siguiente</button>
+    </section>
+
+    <section id="final" class="pantalla">
+      <p class="sub">Tu resultado</p>
+      <p id="puntaje" class="puntaje"></p>
+      <p id="detalle" class="sub"></p>
+      <div class="cierre">
+        <p>Gracias por participar</p>
+        <p>Hay que compartir más</p>
+        <p class="remate">Tinto o miedo</p>
+      </div>
+      <button id="btn-reiniciar" class="btn btn-sec">Jugar otra vez</button>
+    </section>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
